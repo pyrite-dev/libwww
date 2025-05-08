@@ -157,14 +157,14 @@ Help provided by Eric Prud'hommeaux, Susan C. Weber
 #ifdef WWW_MSWINDOWS
 #define _CRT_SECURE_NO_WARNINGS
 
-#ifndef _WINSOCKAPI_
-#define _WINSOCKAPI_
-#endif
-
 #include <windows.h>
 #include <io.h>
 #include <process.h>
 #include <winsock.h>
+
+#ifndef _WINSOCKAPI_
+#define _WINSOCKAPI_
+#endif
 
 #define NETREAD(s,b,l)  recv((s),(b),(l),0)
 #define NETWRITE(s,b,l) send((s),(b),(l),0)
