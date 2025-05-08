@@ -156,6 +156,7 @@ Help provided by Eric Prud'hommeaux, Susan C. Weber
 
 #ifdef WWW_MSWINDOWS
 #define _CRT_SECURE_NO_WARNINGS
+#define WWW_WIN_ASYNC
 
 #include <windows.h>
 #include <io.h>
@@ -317,7 +318,7 @@ Patch by Richard Atterer <richard@atterer.net>, October 2001
 #define WWW_MSWINDOWS
 /* #define WWW_WIN_CONSOLE */
 #define WWW_WIN_WINDOW
-/* #define WWW_WIN_ASYNC */
+#define WWW_WIN_ASYNC
 /* #define WWW_WIN_DLL */
 
 #ifndef _WINSOCKAPI_
@@ -347,51 +348,62 @@ Patch by Richard Atterer <richard@atterer.net>, October 2001
 #define ERRNO_DONE
 
 /* Taken from the WIN32 stuff above. */
-#ifndef EWOULDBLOCK
+#ifdef EWOULDBLOCK
+#undef EWOULDBLOCK
+#endif
 #define EWOULDBLOCK     WSAEWOULDBLOCK
-#endif
 
-#ifndef EINPROGRESS
+#ifdef EINPROGRESS
+#undef EINPROGRESS
+#endif
 #define EINPROGRESS     WSAEINPROGRESS
-#endif
 
-#ifndef ECONNREFUSED
+#ifdef ECONNREFUSED
+#undef ECONNREFUSED
+#endif
 #define ECONNREFUSED    WSAECONNREFUSED
-#endif
 
-#ifndef ETIMEDOUT
+#ifdef ETIMEDOUT
+#undef ETIMEDOUT
+#endif
 #define ETIMEDOUT       WSAETIMEDOUT
-#endif
 
-#ifndef ENETUNREACH
+#ifdef ENETUNREACH
+#undef ENETUNREACH
+#endif
 #define ENETUNREACH     WSAENETUNREACH
-#endif
 
-#ifndef EHOSTUNREACH
+#ifdef EHOSTUNREACH
+#undef EHOSTUNREACH
+#endif
 #define EHOSTUNREACH    WSAEHOSTUNREACH
-#endif
 
-#ifndef EHOSTDOWN
+#ifdef EHOSTDOWN
+#undef EHOSTDOWN
+#endif
 #define EHOSTDOWN       WSAEHOSTDOWN
-#endif
 
-#ifndef EISCONN
-#define EISCONN         WSAEISCONN
+#ifdef EISCONN
+#undef EISCONN
 #endif
+#define EISCONN         WSAEISCONN
 
 /*#define EINVAL          WSAEINVAL*/
 
-#ifndef ECONNRESET
+#ifdef ECONNRESET
+#undef ECONNRESET
+#endif
 #define ECONNRESET      WSAECONNRESET
-#endif
 
-#ifndef ECONNABORTED
+#ifdef ECONNABORTED
+#undef ECONNABORTED
+#endif
 #define ECONNABORTED    WSAECONNABORTED
-#endif
 
-#ifndef ESHUTDOWN
-#define ESHUTDOWN       WSAESHUTDOWN
+#ifdef ESHUTDOWN
+#undef ESHUTDOWN
 #endif
+#define ESHUTDOWN       WSAESHUTDOWN
 
 /* The configure.in script is wrong to default to #define GETGROUPS_T int */
 #ifdef GETGROUPS_T

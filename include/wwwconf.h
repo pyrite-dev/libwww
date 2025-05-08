@@ -405,3 +405,6 @@
 
 /* Define this if sys_nerr must be declared (if it exists). */
 #undef NEED_SYS_NERR_DECLARED
+
+#define HT_NO_NAGLE
+#define HAVE_SETSOCKOPT

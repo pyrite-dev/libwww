@@ -183,17 +183,17 @@ PRIVATE void fd_dump (SOCKET maxfs, fd_set * rset, fd_set * wset, fd_set * oset,
 #ifdef WWW_WIN_ASYNC
 PRIVATE BOOL Timer_setWindowsTimer (HTTimer * timer)
 {
-    UINT id;
+    unsigned long id;
     HWND hwnd = HTEventList_getWinHandle(&id);
-    BOOL status = (SetTimer(hwnd, (UINT)timer, (UINT)HTTimer_getTime(timer), NULL) == 0) ? NO : YES;
+    BOOL status = (SetTimer(hwnd, (UINT_PTR)timer, (UINT)HTTimer_getTime(timer), NULL) == 0) ? NO : YES;
     return status;
 }
 
 PRIVATE BOOL Timer_deleteWindowsTimer (HTTimer * timer)
 {
-    UINT id;
+    unsigned long id;
     HWND hwnd = HTEventList_getWinHandle(&id);
-    BOOL status = (KillTimer(hwnd, (UINT)timer) == 0) ? NO : YES;
+    BOOL status = (KillTimer(hwnd, (UINT_PTR)timer) == 0) ? NO : YES;
     return status;
 }
 #endif /* WWW_WIN_ASYNC */
@@ -834,7 +834,7 @@ PUBLIC int HTEventList_loop (HTRequest * theRequest)
 #ifdef WWW_WIN_ASYNC
 
 /* Only responsible for WM_TIMER and WSA_AsyncSelect */    	
-PRIVATE LRESULT CALLBACK AsyncWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK AsyncWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     WORD event;
     SOCKET sock;
