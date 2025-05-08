@@ -1111,7 +1111,11 @@ Their existance is discovered by configure.
 
 /* dirent.h / ndir.h / dir.h */
 #ifdef HAVE_DIRENT_H
+#ifdef _MSC_VER
+#include <msdirent.h>
+#else
 #include <dirent.h>
+#endif
 #define NAMLEN(dirent) strlen((dirent)->d_name)
 #else
 #define dirent direct
