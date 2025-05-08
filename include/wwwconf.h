@@ -411,3 +411,4 @@
 
 #define HT_NO_NAGLE
 #define HAVE_SETSOCKOPT
+#define HT_MD5
