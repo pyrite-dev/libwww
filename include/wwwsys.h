@@ -157,6 +157,10 @@ Help provided by Eric Prud'hommeaux, Susan C. Weber
 #ifdef WWW_MSWINDOWS
 #define _CRT_SECURE_NO_WARNINGS
 
+#ifndef _WINSOCKAPI_
+#define _WINSOCKAPI_
+#endif
+
 #include <windows.h>
 #include <io.h>
 #include <process.h>
