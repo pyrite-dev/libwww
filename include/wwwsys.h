@@ -146,16 +146,9 @@ Help provided by Eric Prud'hommeaux, Susan C. Weber
 #define WWW_MSWINDOWS
 #endif
 
-#if defined(_MSC_VER) && !defined (_CONSOLE)
-#define WWW_WIN_WINDOW
-#endif
-
-#if defined(_CONSOLE)
-#define WWW_WIN_CONSOLE
-#endif
-
 #ifdef WWW_MSWINDOWS
 #define _CRT_SECURE_NO_WARNINGS
+#define WWW_WIN_WINDOW
 #define WWW_WIN_ASYNC
 
 #include <windows.h>
