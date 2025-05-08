@@ -267,22 +267,6 @@ definitions moved from _WIN32 ifdef by EGP
 #define socerrno WSAGetLastError()
 #define ERRNO_DONE
 
-/*
-
-Return code for socket functions. We can't use -1 as return value
-
-*/
-
-#ifndef EHOSTDOWN
-#define EHOSTDOWN       WSAEHOSTDOWN
-#endif
-
-/*#define EINVAL          WSAEINVAL*/
-
-#ifndef ESHUTDOWN
-#define ESHUTDOWN       WSAESHUTDOWN
-#endif
-
 /* Some compilers do only define WIN32 and NOT _WINDOWS */
 #define NO_GROUPS
 
@@ -339,64 +323,6 @@ Patch by Richard Atterer <richard@atterer.net>, October 2001
 
 #define socerrno WSAGetLastError()
 #define ERRNO_DONE
-
-/* Taken from the WIN32 stuff above. */
-#ifdef EWOULDBLOCK
-#undef EWOULDBLOCK
-#endif
-#define EWOULDBLOCK     WSAEWOULDBLOCK
-
-#ifdef EINPROGRESS
-#undef EINPROGRESS
-#endif
-#define EINPROGRESS     WSAEINPROGRESS
-
-#ifdef ECONNREFUSED
-#undef ECONNREFUSED
-#endif
-#define ECONNREFUSED    WSAECONNREFUSED
-
-#ifdef ETIMEDOUT
-#undef ETIMEDOUT
-#endif
-#define ETIMEDOUT       WSAETIMEDOUT
-
-#ifdef ENETUNREACH
-#undef ENETUNREACH
-#endif
-#define ENETUNREACH     WSAENETUNREACH
-
-#ifdef EHOSTUNREACH
-#undef EHOSTUNREACH
-#endif
-#define EHOSTUNREACH    WSAEHOSTUNREACH
-
-#ifdef EHOSTDOWN
-#undef EHOSTDOWN
-#endif
-#define EHOSTDOWN       WSAEHOSTDOWN
-
-#ifdef EISCONN
-#undef EISCONN
-#endif
-#define EISCONN         WSAEISCONN
-
-/*#define EINVAL          WSAEINVAL*/
-
-#ifdef ECONNRESET
-#undef ECONNRESET
-#endif
-#define ECONNRESET      WSAECONNRESET
-
-#ifdef ECONNABORTED
-#undef ECONNABORTED
-#endif
-#define ECONNABORTED    WSAECONNABORTED
-
-#ifdef ESHUTDOWN
-#undef ESHUTDOWN
-#endif
-#define ESHUTDOWN       WSAESHUTDOWN
 
 /* The configure.in script is wrong to default to #define GETGROUPS_T int */
 #ifdef GETGROUPS_T
@@ -1611,6 +1537,65 @@ typedef unsigned long ms_t;
 #define open _open
 #define write _write
 #define access _access
+#endif
+
+#ifdef _WINSOCKAPI_
+#ifdef EWOULDBLOCK
+#undef EWOULDBLOCK
+#endif
+#define EWOULDBLOCK     WSAEWOULDBLOCK
+
+#ifdef EINPROGRESS
+#undef EINPROGRESS
+#endif
+#define EINPROGRESS     WSAEINPROGRESS
+
+#ifdef ECONNREFUSED
+#undef ECONNREFUSED
+#endif
+#define ECONNREFUSED    WSAECONNREFUSED
+
+#ifdef ETIMEDOUT
+#undef ETIMEDOUT
+#endif
+#define ETIMEDOUT       WSAETIMEDOUT
+
+#ifdef ENETUNREACH
+#undef ENETUNREACH
+#endif
+#define ENETUNREACH     WSAENETUNREACH
+
+#ifdef EHOSTUNREACH
+#undef EHOSTUNREACH
+#endif
+#define EHOSTUNREACH    WSAEHOSTUNREACH
+
+#ifdef EHOSTDOWN
+#undef EHOSTDOWN
+#endif
+#define EHOSTDOWN       WSAEHOSTDOWN
+
+#ifdef EISCONN
+#undef EISCONN
+#endif
+#define EISCONN         WSAEISCONN
+
+/*#define EINVAL          WSAEINVAL*/
+
+#ifdef ECONNRESET
+#undef ECONNRESET
+#endif
+#define ECONNRESET      WSAECONNRESET
+
+#ifdef ECONNABORTED
+#undef ECONNABORTED
+#endif
+#define ECONNABORTED    WSAECONNABORTED
+
+#ifdef ESHUTDOWN
+#undef ESHUTDOWN
+#endif
+#define ESHUTDOWN       WSAESHUTDOWN
 #endif
 
 #endif
