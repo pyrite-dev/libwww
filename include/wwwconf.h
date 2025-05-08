@@ -122,7 +122,10 @@
 #define HAVE_OPENDIR
 
 /* Define if you have the select function.  */
+#undef HAVE_SELECT
+#ifndef _WIN32
 #define HAVE_SELECT
+#endif
 
 /* Define if you have the socket_ioctl function.  */
 #undef HAVE_SOCKET_IOCTL
