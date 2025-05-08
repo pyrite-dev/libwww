@@ -142,11 +142,11 @@ Help provided by Eric Prud'hommeaux, Susan C. Weber
 <P.M.Hounslow@reading.ac.uk>, and a lot of other PC people.
 */
 
-#if defined(_WINDOWS) || defined(_CONSOLE)
+#if defined(_MSC_VER) || defined(_CONSOLE)
 #define WWW_MSWINDOWS
 #endif
 
-#if defined(_WINDOWS) && !defined (_CONSOLE)
+#if defined(_MSC_VER) && !defined (_CONSOLE)
 #define WWW_WIN_WINDOW
 #endif
 
@@ -155,6 +155,7 @@ Help provided by Eric Prud'hommeaux, Susan C. Weber
 #endif
 
 #ifdef WWW_MSWINDOWS
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <windows.h>
 #include <io.h>
@@ -166,7 +167,7 @@ Help provided by Eric Prud'hommeaux, Susan C. Weber
 #define NETCLOSE(s)     closesocket(s)
 #define IOCTL(s,c,a)	ioctlsocket(s,c, (long *) a)
 
-#define MKDIR(a,b)	mkdir((a))
+#define MKDIR(a,b)	_mkdir((a))
 #define REMOVE(a)	remove((a))
 #define DEFAULT_SUFFIXES	"."
 
@@ -291,28 +292,20 @@ Return code for socket functions. We can't use -1 as return value
 
 */
 
-#define EWOULDBLOCK     WSAEWOULDBLOCK
-#define EINPROGRESS     WSAEINPROGRESS
-#define ECONNREFUSED    WSAECONNREFUSED
-#define ETIMEDOUT       WSAETIMEDOUT
-#define ENETUNREACH     WSAENETUNREACH
-#define EHOSTUNREACH    WSAEHOSTUNREACH
+#ifndef EHOSTDOWN
 #define EHOSTDOWN       WSAEHOSTDOWN
-#define EISCONN         WSAEISCONN
-#define EINVAL          WSAEINVAL
-#define ECONNRESET      WSAECONNRESET
-#define ECONNABORTED    WSAECONNABORTED
+#endif
+
+/*#define EINVAL          WSAEINVAL*/
+
+#ifndef ESHUTDOWN
 #define ESHUTDOWN       WSAESHUTDOWN
+#endif
 
 /* Some compilers do only define WIN32 and NOT _WINDOWS */
 #define NO_GROUPS
 
-#ifdef _WIN32
-#define MKDIR(a,b)	mkdir((a))     /* CLB NT has mkdir, but only one arg */
 #define SLEEP(n)        Sleep((n)*1000)
-#else
-#define MKDIR(a,b)	_mkdir((a))    /* CLB NT has mkdir, but only one arg */
-#endif /* WIN32 */
 
 #endif /* WWW_MSWINDOWS */
 
@@ -1184,8 +1177,10 @@ Their existance is discovered by configure.
 */
 
 #ifndef __MINGW32__ /* has a typedef for BOOLEAN */
+#ifndef _MSC_VER
 #ifndef BOOLEAN
 typedef char	BOOLEAN;				    /* Logical value */
+#endif
 #endif
 #endif
 

@@ -192,9 +192,15 @@
 
 /* Define if you have the <direct.h> header file.  */
 #undef HAVE_DIRECT_H
+#ifdef _WIN32
+#define HAVE_DIRECT_H
+#endif
 
 /* Define if you have the <dirent.h> header file.  */
+#undef HAVE_DIRENT_H
+#ifndef _WIN32
 #define HAVE_DIRENT_H
+#endif
 
 /* Define if you have the <stddef.h> header file.  */
 #define HAVE_STDDEF_H
