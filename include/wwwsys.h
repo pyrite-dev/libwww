@@ -247,27 +247,10 @@ These next defintions are because the UNIX stuff is not supplied with BC4
 #define	S_IFREG		_IFREG
 #endif
 
-#define	S_IFLNK		_IFLNK
-
 #ifdef S_IFIFO
 #undef S_IFIFO
 #define	S_IFIFO		_IFIFO
 #endif
-
-#define	S_IRWXU 	0000700	/* rwx, owner */
-#define		S_IRUSR	0000400	/* read permission, owner */
-#define		S_IWUSR	0000200	/* write permission, owner */
-#define		S_IXUSR	0000100	/* execute/search permission, owner */
-#define	S_IRWXG		0000070	/* rwx, group */
-#define		S_IRGRP	0000040	/* read permission, group */
-#define		S_IWGRP	0000020	/* write permission, grougroup */
-#define		S_IXGRP	0000010	/* execute/search permission, group */
-#define	S_IRWXO		0000007	/* rwx, other */
-#define		S_IROTH	0000004	/* read permission, other */
-#define		S_IWOTH	0000002	/* write permission, other */
-#define		S_IXOTH	0000001	/* execute/search permission, other */
-
-#define	S_ISREG(m)	(((m)&_IFMT) == _IFREG)
 
 #define DIR_SEPARATOR
 #define DIR_SEPARATOR_CHAR	'\\'
@@ -1612,6 +1595,14 @@ typedef unsigned long ms_t;
 
 /*
 */
+	
+#ifdef _MSC_VER
+#define getcwd _getcwd
+#define close _close
+#define open _open
+#define write _write
+#define access _access
+#endif
 
 #endif
 
