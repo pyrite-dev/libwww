@@ -1,4 +1,6 @@
 project("www")
+	kind("StaticLib")
+	targetdir("lib/%{cfg.buildcfg}/%{cfg.platform}")
 for _,v in ipairs({
 	"app",
 	"cache",
@@ -18,7 +20,6 @@ for _,v in ipairs({
 	"trans",
 	"utils"
 }) do
-	kind("StaticLib")
 	files("src/" .. v .. "/*.c")
 end
 for _,v in ipairs({
@@ -28,5 +29,4 @@ for _,v in ipairs({
 end
 	includedirs("include")
 	includedirs("modules/md5")
-	targetdir("lib/%{cfg.buildcfg}/%{cfg.platform}")
 	defines("HAVE_CONFIG_H")
