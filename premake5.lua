@@ -1,7 +1,4 @@
-project("www")
-	kind("StaticLib")
-	targetdir("lib/%{cfg.buildcfg}/%{cfg.platform}")
-for _,v in ipairs({
+local dir_pair = {
 	"app",
 	"cache",
 	"core",
@@ -19,7 +16,27 @@ for _,v in ipairs({
 	"telnet",
 	"trans",
 	"utils"
-}) do
+}
+
+newoption({
+	trigger = "libwww-ssl",
+	value = "toggle",
+	description = "Use OpenSSL or not",
+	allowed = {
+		{"yes", "Use OpenSSL"},
+		{"no", "Don't use OpenSSL"}
+	},
+	default = "yes"
+})
+
+if _OPTIONS["libwww-ssl"] == "yes" then
+	table.insert(dir_pair, "ssl")
+end
+
+project("www")
+	kind("StaticLib")
+	targetdir("lib/%{cfg.buildcfg}/%{cfg.platform}")
+for _,v in ipairs(dir_pair) do
 	files("src/" .. v .. "/*.c")
 end
 for _,v in ipairs({
